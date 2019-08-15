@@ -139,9 +139,11 @@ My final model results were:
 
 If a well known architecture was chosen:
 * What architecture was chosen?
+
 I used LeNet-5 architecture.
 
 * Why did you believe it would be relevant to the traffic sign application?
+
 Traffic signs are nothing but shapes and/or writings. This is what LeNet excels at as Yann Lecun shows with this amazing gif:
 
 ![](http://yann.lecun.com/exdb/lenet/gifs/asamples.gif)
@@ -149,17 +151,20 @@ Traffic signs are nothing but shapes and/or writings. This is what LeNet excels 
 So, using with the initial parameters given in the lab, it already resulted in almost 90.5% of accuracy. Then, I thought, if I can get more epoch and augment the data in a way that
 would make the model more robust, it would increase the accuracy a bit and I would go from there. To my surprise, it increased the accuracy to 96%. That was a lot more than I had 
 expected. My judgment on that was,
-1- Either the background behind the signs were affecting the model too much
-2- Or the validation set had mostly rotated images
-3- Or both.
+
+1. Either the background behind the signs were affecting the model too much
+
+2. Or the validation set had mostly rotated images
+
+3. Or both.
 
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
 Accuracy on the training set clearly shows that it is over-fitting. I think that is pretty normal considering the model was taught with those images.
  
-Accuracy on the validation and the test set are both over 93% and show that model is working well. The reason why the validation accuracy is higher than testing is because of the 
-dataset size, in my opinion. The model makes more inaccurate predictions on test data set(12630 rows) than the validation set(4410 rows).
+Accuracy on the validation and the test set are both over 93% and show that the model is working well. The reason why the validation accuracy is higher than testing accuracy
+is because of the dataset size, in my opinion. The model makes more inaccurate predictions on test data set(12630 rows) than the validation set(4410 rows).
 
 ### Test a Model on New Images
 
@@ -222,11 +227,11 @@ The model was able to correctly guess 33 out of 33 of the traffic signs, which g
 
 One reason for that is that there are only 33 images, and compared to the other images, they are relatively less noisy(background, darkness, etc.).
 
-And this was the best accuracy. It generally yields around 97% with 1 inaccurate prediction that is the 'Roundabout mandatory' sign.
+And this was the best accuracy among my other tries, too. It generally yields around 97% with 1 inaccurate prediction that is the 'Roundabout mandatory' sign.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 19th cell of the Ipython notebook.
 
 As seen in the table below, the model is pretty confident about its predictions with the lowest probability being 96.3%.
 
