@@ -29,6 +29,8 @@ The goals / steps of this project are the following:
 [image8]: ./GTSRB/00012/00000_00015.jpg "Priority road"
 [image9]: ./GTSRB/00013/00000_00015.jpg "Yield"
 [image10]: ./GTSRB/00014/00000_00015.jpg "Stop"
+[image11]: ./GTSRB/00040/00000_00015.jpg "Roundabout mandatory"
+
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -76,21 +78,22 @@ Then, I normalized the data at hand to have ~0 mean and equal variance by using 
 By doing so, the content of the image is not changed, but the optimization will be much easier to proceed numerically.
 
 I decided to generate additional data because after exploration of the data set, I noticed that there were classes with significantly less examples to train on.
-Besides, I wanted to be sure that with a little change (like rotation or shifting) on the same image, it wouldn't throw the model off completely.
+Besides, I wanted to be sure that with a little change (like rotation or shifting) on the same image, it wouldn't throw the model completely off.
 
 Therefore, to add more data to the the data set, I added 3 sets of the grayscaled training data with following operations applied on them:
-1- Cropped 5 pixel from left, right, up, and down. I did that because after exploration of the data, I was confident most of the images were positioned really good at the center.
+
+1. Cropped 5 pixel from left, right, up, and down. I did that because after exploration of the data, I was confident most of the images were positioned really good at the center.
 And the background of the traffic sign could have affected the model. Here is an example of an original image and an augmented image:
 
 ![Cropped sign][image3]
 
-2- Same thing in step 1. But this time, I also rotated the image 10 degrees clock wise. I didn't want to rotate the image too much because first this wouldn't be a real world example that 
+2. Same thing in step 1. But this time, I also rotated the image 10 degrees clock wise. I didn't want to rotate the image too much because first this wouldn't be a real world example that 
 I wanted to train the model with (like a speed limit sign rotated 60 degrees). Even if there are examples of that, I assume it should be very rare.
 Here is an example of an original image and an augmented image:
 
 ![alt text][image4]
 
-3- Same thing in step 1. But this time, I also rotated the image 10 degrees counter clock wise. Here is an example of an original image and an augmented image:
+3. Same thing in step 1. But this time, I also rotated the image 10 degrees counter clock wise. Here is an example of an original image and an augmented image:
 
 ![alt text][image5]
 
@@ -162,46 +165,79 @@ dataset size, in my opinion. The model makes more inaccurate predictions on test
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five of the thirty three German traffic signs that I found on the web:
+Here are some of the thirty three German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image6] ![alt text][image7] ![alt text][image8] ![alt text][image9] ![alt text][image10] ![Roundabout mandatory][image11]
 
-The first image might be difficult to classify because ...
+The last image was the most difficult to classify because if I was to define it to someone who doesn't know the name of the shapes, I would say 'there is a dark area in the middle
+and curvy white areas wrapping around it'. If you check label 40, and label 42, they both fit in that definition.
+
+Therefore the model used to predict that 'Roundabout mandatory' sign(40) as the 'End of no passing by vehicles over 3.5 metric tons' sign(42).
+
+When I augmented the training data with rotated and cropped images, the issue was somewhat solved. Although, this image has the lowest confidence level as shown in the softmax probabilities.
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Image			        										|     Prediction	        									| 
+|:-------------------------------------------------------------:|:-------------------------------------------------------------:| 
+| No passing for vehicles over 3.5 metric tons					|  No passing for vehicles over 3.5 metric tons					|
+| Right-of-way at the next intersection							|  Right-of-way at the next intersection						|
+| Priority road													|  Priority road												|
+| Yield															|  Yield														|
+| Stop															|  Stop															|
+| No vehicles													|  No vehicles													|
+| Vehicles over 3.5 metric tons prohibited						|  Vehicles over 3.5 metric tons prohibited						|
+| No entry														|  No entry														|
+| General caution												|  General caution												|
+| Dangerous curve to the left									|  Dangerous curve to the left									|
+| Dangerous curve to the right									|  Dangerous curve to the right									|
+| Double curve													|  Double curve													|
+| Bumpy road													|  Bumpy road													|
+| Slippery road		 				 							|  Slippery road		 				 						|
+| Road narrows on the right	   					                |  Road narrows on the right	   					            |
+| Road work							                            |  Road work							                        |
+| Traffic signals										        |  Traffic signals										        |
+| Pedestrians									                |  Pedestrians									                |
+| Children crossing						 				        |  Children crossing						 				    |
+| Bicycles crossing	 							                |  Bicycles crossing	 							            |
+| Beware of ice/snow								            |  Beware of ice/snow								            |
+| Wild animals crossing                                         |  Wild animals crossing                                        |
+| End of all speed and passing limits					        |  End of all speed and passing limits					        |
+| Turn right ahead				 				                |  Turn right ahead				 				                |
+| Turn left ahead								                |  Turn left ahead								                |
+| Ahead only	                                                |  Ahead only	                                                |
+| Go straight or right											|  Go straight or right											|
+| Go straight or left	                                        |  Go straight or left	                                        |
+| Keep right	                                                |  Keep right	                                                |
+| Keep left	                                                    |  Keep left	                                                |
+| Roundabout mandatory	                                        |  Roundabout mandatory								            |
+| End of no passing                                             |  End of no passing                                            |
+| End of no passing by vehicles over 3.5 metric tons	        |  End of no passing by vehicles over 3.5 metric tons	        |
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 33 out of 33 of the traffic signs, which gives an accuracy of 100%.
+
+One reason for that is that there are only 33 images, and compared to the other images, they are relatively less noisy(background, darkness, etc.).
+
+And this was the best accuracy. It generally yields around 97% with 1 inaccurate prediction that is the 'Roundabout mandatory' sign.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+As seen in the table below, the model is pretty confident about its predictions with the lowest probability being 96.3%.
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| Probability         	|     Prediction	        									| 
+|:---------------------:|:-------------------------------------------------------------:| 
+| 1.00000000			| Keep right	                                                | 
+| 9.99999881e-01		| Keep left	                                                    |
+| 9.63293910e-01		| Roundabout mandatory	                                        |
+| 1.00000000			| End of no passing                                             |
+| 9.99998808e-01	    | End of no passing by vehicles over 3.5 metric tons	        |
 
 
-For the second image ... 
-
-### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
-#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
 
