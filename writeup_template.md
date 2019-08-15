@@ -24,9 +24,11 @@ The goals / steps of this project are the following:
 [image3]: ./examples/Cropped.png "Cropped"
 [image4]: ./examples/Clockwise10.png "Clock-wise 10 degrees"
 [image5]: ./examples/CounterClockwise10.png "Counter clock-wise 10 degrees"
-[image6]: ./GTSRB/00010/00000_00015.ppm "TryOut"
-[image7]: ./examples/ "Traffic Sign 4"
-[image8]: ./examples/ "Traffic Sign 5"
+[image6]: ./GTSRB/00010/00000_00015.jpg "No passing for vehicles over 3.5 metric tons"
+[image7]: ./GTSRB/00011/00000_00015.jpg "Right-of-way at the next intersection"
+[image8]: ./GTSRB/00012/00000_00015.jpg "Priority road"
+[image9]: ./GTSRB/00013/00000_00015.jpg "Yield"
+[image10]: ./GTSRB/00014/00000_00015.jpg "Stop"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -144,16 +146,16 @@ Traffic signs are nothing but shapes and/or writings. This is what LeNet excels 
 So, using with the initial parameters given in the lab, it already resulted in almost 90.5% of accuracy. Then, I thought, if I can get more epoch and augment the data in a way that
 would make the model more robust, it would increase the accuracy a bit and I would go from there. To my surprise, it increased the accuracy to 96%. That was a lot more than I had 
 expected. My judgment on that was,
-* Either the background behind the signs were affecting the model too much
-* Or the validation set had mostly rotated images
-* Or both.
+1- Either the background behind the signs were affecting the model too much
+2- Or the validation set had mostly rotated images
+3- Or both.
 
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
-+ Accuracy on the training set clearly shows that it is over-fitting. I think that is pretty normal considering the model was taught with those images.
+Accuracy on the training set clearly shows that it is over-fitting. I think that is pretty normal considering the model was taught with those images.
  
-+ Accuracy on the validation and the test set are both over 93% and show that model is working well. The reason why the validation accuracy is higher than testing is because of the 
+Accuracy on the validation and the test set are both over 93% and show that model is working well. The reason why the validation accuracy is higher than testing is because of the 
 dataset size, in my opinion. The model makes more inaccurate predictions on test data set(12630 rows) than the validation set(4410 rows).
 
 ### Test a Model on New Images
